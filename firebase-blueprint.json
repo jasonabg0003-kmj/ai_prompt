@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "Prompt": {
+      "title": "Prompt",
+      "description": "초보자를 위한 AI 이미지·창작 프롬프트 항목",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "프롬프트 제목 (100자 이내)"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["사진 합성", "스타일 변환", "캐릭터·포스터"],
+          "description": "프롬프트 분류 (사진 합성, 스타일 변환, 캐릭터·포스터)"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000,
+          "description": "프롬프트 전체 내용 (10,000자 이내, 줄바꿈 유지)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "만든 시간 (Firestore serverTimestamp)"
+        }
+      },
+      "required": ["title", "category", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/prompts/{promptId}": {
+      "schema": "Prompt",
+      "description": "AI 프롬프트 창고 메인 컬렉션"
+    }
+  }
+}
